@@ -18,8 +18,17 @@ const dbo = require("../database/conn");
 dbo.connectToServer();
 
 //Serve static files from the "public" directory
+//appRouter.route('/').get(function (req, res) {
+//    res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index_home.html'));
+//});
+
+//test
 appRouter.route('/').get(function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index_home.html'));
+  // if(!req.session.user){
+  //     res.redirect('/login');
+  // }
+  // res.send("Root directory");
+  res.send("Home Page")
 });
 
 // Serve static files from the "public" directory
