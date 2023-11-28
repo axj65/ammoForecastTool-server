@@ -10,7 +10,7 @@ const { ObjectId } = require('mongodb');
 const appRouter = express.Router();
 appRouter.use(express.json());
 
-appRouter.use(session({secret: "Your secret key", resave: false, saveUninitialized: false}));
+//appRouter.use(session({secret: "Your secret key", resave: false, saveUninitialized: false}));
 
 //var session;
 
