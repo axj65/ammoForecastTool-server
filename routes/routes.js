@@ -17,12 +17,6 @@ appRouter.use(session({secret: "Your secret key", resave: false, saveUninitializ
 const dbo = require("../database/conn");
 dbo.connectToServer();
 
-//Serve static files from the "public" directory
-//appRouter.route('/').get(function (req, res) {
-//    res.sendFile(path.join(__dirname, '..', '..', 'client', 'public', 'index_home.html'));
-//});
-
-//test
 appRouter.route('/').get(function (req, res) {
   // if(!req.session.user){
   //     res.redirect('/login');
@@ -68,23 +62,22 @@ appRouter.post('/api/query', async (req, res) => {
 appRouter.use('/app', express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 
 
-appRouter.get('/app/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get('/app/*', function (req, res) {
+//    res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 appRouter.get("/api/tableData", async function (req, res) {
   let db_connect = dbo.getDb("ammoForecastTool");
 
-  // ... your logic to construct the query from req.query
   // Initialize query object
   let query = {};
 
-    // Check if eventType parameter is provided and use a regex to match the pattern
+  // Check if eventType parameter is provided and use a regex to match the pattern
   if (req.query.eventType) {
     query.eventType = new RegExp(req.query.eventType, 'i'); // 'i' for case-insensitive
   }
   
-    // Clean the query object to remove undefined or empty keys
+  // Clean the query object to remove undefined or empty keys
   Object.keys(query).forEach(key => {
     if (query[key] === undefined || query[key] === '') {
       delete query[key];
@@ -99,15 +92,15 @@ appRouter.get("/api/tableData", async function (req, res) {
   }
 });
 
-appRouter.get("/table", function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get("/table", function (req, res) {
+//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 
 // Route for user registration.
-appRouter.get("/register", function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get("/register", function (req, res) {
+//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 // Post for user registration function
 appRouter.route("/register").post(async function (req, response) {
@@ -158,9 +151,9 @@ appRouter.route("/register").post(async function (req, response) {
 
 
 // Route for user to login.
-appRouter.get("/login", function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get("/login", function (req, res) {
+//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 
 // Post for login function
@@ -262,9 +255,9 @@ appRouter.post('/send-email', (req, res) => {
   
 
 // Route for user to faq.
-appRouter.get("/faq", function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get("/faq", function (req, res) {
+//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 // Route for user to myevents.
 appRouter.get("/myevents", async function (req, res) {
