@@ -212,10 +212,10 @@ appRouter.post('/saveEvent', async function (req, res) {
       location: req.body.location,
       additionalInfo: req.body.additionalInfo,
       tableData: req.body.tableData,
-      numberToTrain: req.body.numberToTrain, // Add this line for numberToTrain
-      eventType: req.body.eventType,      // Add this line for eventType
-      weaponType: req.body.weaponType,    // Add this line for weaponType
-      userId: req.body.userId // Include the userId in the eventData
+      numberToTrain: req.body.numberToTrain, 
+      eventType: req.body.eventType,      
+      weaponType: req.body.weaponType,    
+      userId: req.body.userId 
     };
 
     // Save to MongoDB
@@ -229,9 +229,9 @@ appRouter.post('/saveEvent', async function (req, res) {
 });
 
 
-appRouter.get("/saveEvent", function (req, res) {
-  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-});
+//appRouter.get("/saveEvent", function (req, res) {
+//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
+//});
 
 //sending email from contact form
 appRouter.post('/send-email', (req, res) => {
