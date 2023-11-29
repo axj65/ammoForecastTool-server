@@ -18,16 +18,12 @@ const dbo = require("../database/conn");
 dbo.connectToServer();
 
 appRouter.route('/').get(function (req, res) {
-  // if(!req.session.user){
-  //     res.redirect('/login');
-  // }
-  // res.send("Root directory");
   res.send("Home Page")
 });
 
 // Serve static files from the "public" directory
 // MAKE SURE THIS GOES UNDER THE '/' ROUTE
-appRouter.use(express.static(path.join(__dirname, '..', '..', 'client', 'public')));
+//appRouter.use(express.static(path.join(__dirname, '..', '..', 'client', 'public')));
 
 
 // POST route to handle search query from Form.js
@@ -59,16 +55,11 @@ appRouter.post('/api/query', async (req, res) => {
  });
  
 
-appRouter.use('/app', express.static(path.join(__dirname, '..', '..', 'client', 'build')));
+//appRouter.use('/app', express.static(path.join(__dirname, '..', '..', 'client', 'build')));
 
-
-//appRouter.get('/app/*', function (req, res) {
-//    res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
-
+// GET request path to database
 appRouter.get("/api/tableData", async function (req, res) {
   let db_connect = dbo.getDb("ammoForecastTool");
-
   // Initialize query object
   let query = {};
 
@@ -92,15 +83,6 @@ appRouter.get("/api/tableData", async function (req, res) {
   }
 });
 
-//appRouter.get("/table", function (req, res) {
-//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
-
-
-// Route for user registration.
-//appRouter.get("/register", function (req, res) {
-//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
 
 // Post for user registration function
 appRouter.route("/register").post(async function (req, response) {
@@ -118,7 +100,6 @@ appRouter.route("/register").post(async function (req, response) {
     // Hash both the password and confirmPassword before comparing
     const hashedPassword = sha256(req.body.password);
     const hashedConfirmPassword = sha256(req.body.confirmPassword);
-    
     
     let registrationDetails = {
       email: req.body.email,
@@ -147,13 +128,6 @@ appRouter.route("/register").post(async function (req, response) {
     response.status(500).send("Internal server error occurred while trying to register."); // Internal Server Error
   }
 });
-
-
-
-// Route for user to login.
-//appRouter.get("/login", function (req, res) {
-//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
 
 
 // Post for login function
@@ -185,7 +159,6 @@ appRouter.route("/login").post(async function (req, response) {
     response.status(500).send("Internal server error occurred while trying to log in."); // Internal Server Error
   }
 });
-
 
 
 // Route to save event data
@@ -222,10 +195,6 @@ appRouter.post('/saveEvent', async function (req, res) {
 });
 
 
-//appRouter.get("/saveEvent", function (req, res) {
-//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
-
 //sending email from contact form
 appRouter.post('/send-email', (req, res) => {
    let transporter = nodemailer.createTransport({
@@ -252,12 +221,7 @@ appRouter.post('/send-email', (req, res) => {
      }
    });
 });
-  
 
-// Route for user to faq.
-//appRouter.get("/faq", function (req, res) {
-//  res.sendFile(path.join(__dirname, '..', '..', 'client', 'build', 'index.html'));
-//});
 
 // Route for user to myevents.
 appRouter.get("/myevents", async function (req, res) {
@@ -283,6 +247,7 @@ appRouter.get("/myevents", async function (req, res) {
     console.log(error);
   }
 });
+
 
 // Route to delete an event by ID.
 appRouter.delete("/myevents/:eventId", async function (req, res) {
